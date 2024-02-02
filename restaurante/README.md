@@ -1,56 +1,53 @@
-# Desafio Backend | Java
+# Seja muito bem-vindo avaliador(a)!!
 
-Olá, candidato! Se você chegou até aqui, é porque demonstrou interesse em fazer parte do nosso time. Preparamos um desafio para entendermos um pouco mais sobre suas habilidades como desenvolvedor backend em Java.
+Sou o candidato William Barreto e a seguir está prestes a se assustar com meu código kkkk!
 
-## 🚀 Objetivo:
+## Objetivo:
 
-Desenvolver uma API em Java Spring Boot que implemente um sistema de gerenciamento de pedidos para um restaurante.
+Meu objetivo aqui é ser breve quanto a informações que julgo relevantes para você.
 
-## 📜 Requisitos:
+Abaixo segue alguns Curls que podem ser uteis:
 
-### 1. Tecnologias:
+Um adendo (adendao aliás rsrs), minha configuração da autenticação com Token Jwt e spring Secutiry não ficou
+muito completa por motivos maiores que eu, um deles foi o tempo haha, outro que eu por azar configurei o projeto
+com SpringSecutiry 6 e foi bem chato implementar as novas formas de fazer a roda kk.
 
-- Java 11+
-- Spring Boot
-- Maven ou Gradle
-- Banco de dados de sua escolha (H2, MySQL, PostgreSQL, etc.)
-- Documentação da API com Swagger ou similar
+O endpoint de cadastrar o usuario no swagger está bugado, 'objeto recursivo'
 
-### 2. Gerenciamento de Produtos:
-- Criar, listar, atualizar e deletar produtos.
-- Cada produto deve ter um nome, preço e uma categoria (bebida, entrada, prato principal, sobremesa).
+Você vai precisar do Token de um usuário cadastrado.
 
-### 3. Gerenciamento de Pedidos:
-- Criar e listar pedidos.
-- Cada pedido deve conter um ou mais produtos e o valor total do pedido.
-- Implementar a funcionalidade de adicionar produtos a um pedido.
+Criar usuário:
 
-### 4. Validações e Erros:
-- Implemente validações para garantir a integridade dos dados.
-- Responda com mensagens de erro claras e status HTTP apropriados.
+curl --request POST \
+--url http://localhost:8080/auth/save \
+--header 'Content-Type: application/json' \
+--header 'customer: CUSTOMER:6EEDC0FE0717450784FA2A5C49B17AE4' \
+--data '{
 
-### 5. Documentação
-- Documentar todos os endpoints da API com Swagger ou ferramenta similar.
+	"username" : "barreto",
+	"password" : "admin",
+	"roles": [ {
+		"id" : 1,
+		"description": "ADMIN"
+	}]
+}'
 
-## 🥇 Diferenciais:
+Login para capturar o acessToken
 
-- Paginação nos endpoints.
-- Registro de logs.
-- Dockerização da aplicação.
-- Implementar autenticação básica ou JWT para proteger as rotas da API.
+curl --request POST \
+--url http://localhost:8080/auth/api/v1/login \
+--header 'Content-Type: application/json' \
+--header 'customer: CUSTOMER:6EEDC0FE0717450784FA2A5C49B17AE4' \
+--data '{
 
-## 🗳️ Instruções de Submissão:
+	"userName" : "barreto",
+	"password" : "admin"
 
-1. Faça um fork deste repositório para sua conta pessoal do GitHub.
-2. Commit e push suas mudanças para o seu fork.
-3. Envie um e-mail para [pedro.miotti@khipo.com.br] com o link do repositório.
+}'
 
-## 🧪 Avaliação:
+Request com Token:
 
-- Estrutura do código e organização.
-- Uso adequado das ferramentas e tecnologias.
-- Implementação dos requisitos e regras de negócio.
-- Design e usabilidade.
-- Funcionalidades extras (diferenciais).
-
-Boa sorte com o desafio! Estamos ansiosos para ver sua solução.
+curl --request GET \
+--url 'http://localhost:8080/products?account=unused%20in%20V2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiYXJyZXRvIiwiaWF0IjoxNzA2ODMwODM2LCJleHAiOjE3MDY4MzQ0MzZ9.5LFFWK6genAMEYQ_4umHLutd_PrCmMxpa-7IXS6U5ZI' \
+--header 'accept: application/vnd.pagseguro.api.v2+json'

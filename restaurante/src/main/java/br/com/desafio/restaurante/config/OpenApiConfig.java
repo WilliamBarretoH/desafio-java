@@ -1,5 +1,7 @@
 package br.com.desafio.restaurante.config;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +13,6 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
-
 public class OpenApiConfig {
 
     @Bean
@@ -30,7 +31,15 @@ public class OpenApiConfig {
                 .contact(contact)
                 .license(mitLicense);
 
-        return new OpenAPI().info(info);
+        SecurityScheme securityScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")
+                .in(SecurityScheme.In.HEADER)
+                .name("Authorization");
+
+        return new OpenAPI().info(info)
+                .components(new Components().addSecuritySchemes("JWT", securityScheme));
     }
 
 }
