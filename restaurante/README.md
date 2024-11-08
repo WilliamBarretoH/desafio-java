@@ -1,7 +1,5 @@
 # Seja muito bem-vindo avaliador(a)!!
 
-Sou o candidato William Barreto e a seguir está prestes a se assustar com meu código kkkk!
-
 ## Objetivo:
 
 Meu objetivo aqui é ser breve quanto a informações que julgo relevantes para você.
